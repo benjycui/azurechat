@@ -2,7 +2,6 @@
 import "server-only";
 
 import { getCurrentUser } from "@/features/auth-page/helpers";
-import { CHAT_DEFAULT_SYSTEM_PROMPT } from "@/features/theme/theme-config";
 import { ChatCompletionStreamingRunner } from "openai/resources/beta/chat/completions";
 import { ChatApiRAG } from "../chat-api/chat-api-rag";
 import { FindAllChatDocuments } from "../chat-document-service";
@@ -40,9 +39,6 @@ export const ChatAPIEntry = async (props: UserPrompt, signal: AbortSignal) => {
       signal,
     }),
   ]);
-  // Starting values for system and user prompt
-  // Note that the system message will also get prepended with the extension execution steps. Please see ChatApiExtensions method.
-  currentChatThread.personaMessage = `${CHAT_DEFAULT_SYSTEM_PROMPT} \n\n ${currentChatThread.personaMessage}`;
 
   let chatType: ChatTypes = "extensions";
 
